@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+:root {
+  font-family: 'Archivo', system-ui, sans-serif;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
