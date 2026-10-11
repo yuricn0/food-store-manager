@@ -31,3 +31,25 @@ export const produtoApi = {
       body: JSON.stringify({ quantidade }),
     }),
 };
+
+export const clienteApi = {
+  listar: () => request('/clientes'),
+  buscarPorId: (id) => request(`/clientes/${id}`),
+  criar: (dados) =>
+    request('/clientes', { method: 'POST', body: JSON.stringify(dados) }),
+  atualizar: (id, dados) =>
+    request(`/clientes/${id}`, { method: 'PUT', body: JSON.stringify(dados) }),
+  remover: (id) => request(`/clientes/${id}`, { method: 'DELETE' }),
+};
+
+export const pedidoApi = {
+  listar: () => request('/pedidos'),
+  buscarPorId: (id) => request(`/pedidos/${id}`),
+  criar: (dados) =>
+    request('/pedidos', { method: 'POST', body: JSON.stringify(dados) }),
+  alterarStatus: (id, status) =>
+    request(`/pedidos/${id}/status`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status }),
+    }),
+};

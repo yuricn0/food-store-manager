@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import ProdutosPage from './pages/ProdutosPage';
+import ClientesPage from './pages/ClientesPage';
+import PedidosPage from './pages/PedidosPage';
 
 const TITULOS = {
   produtos: 'Produtos',
+  clientes: 'Clientes',
   pedidos: 'Pedidos',
   entregas: 'Entregas',
   dashboard: 'Dashboard',
@@ -33,6 +36,8 @@ export default function App() {
 
         <main className="px-8 py-10 pb-28 max-w-4xl">
           {pagina === 'produtos' && <ProdutosPage />}
+          {pagina === 'clientes' && <ClientesPage />}
+          {pagina === 'pedidos' && <PedidosPage />}
         </main>
       </div>
     </div>

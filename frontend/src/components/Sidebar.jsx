@@ -11,10 +11,23 @@ const ITENS = [
       </>
     ),
   },
+    {
+    id: 'clientes',
+    rotulo: 'Clientes',
+    disponivel: true,
+    icone: (
+      <>
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </>
+    ),
+  },
   {
     id: 'pedidos',
     rotulo: 'Pedidos',
-    disponivel: false,
+    disponivel: true,
     icone: (
       <>
         <path d="M4 2v20l2-1.5L8 22l2-1.5L12 22l2-1.5L16 22l2-1.5L20 22V2l-2 1.5L16 2l-2 1.5L12 2l-2 1.5L8 2 6 3.5 4 2z" />

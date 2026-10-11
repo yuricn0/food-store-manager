@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import produtoRoutes from './routes/produtoRoutes.js';
 import { errorHandler } from './middlewares/errorHandler.js';
+import clienteRoutes from './routes/clienteRoutes.js';
+import pedidoRoutes from './routes/pedidoRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,6 +16,8 @@ app.get('/health', (req, res) => {
 });
 
 app.use('/produtos', produtoRoutes);
+app.use('/clientes', clienteRoutes);
+app.use('/pedidos', pedidoRoutes);
 
 app.use(errorHandler);
 
