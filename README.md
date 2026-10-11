@@ -9,7 +9,7 @@ A aplicação controla o catálogo de produtos e o estoque, registra pedidos de 
 Em desenvolvimento, com entregas incrementais:
 
 - [x] **Entrega 1** — Catálogo de produtos com controle de estoque
-- [ ] **Entrega 2** — Clientes e pedidos
+- [x] **Entrega 2** — Clientes e pedidos
 - [ ] **Entrega 3** — Entregas em lotes
 - [ ] **Entrega 4** — Autenticação e dashboard
 
