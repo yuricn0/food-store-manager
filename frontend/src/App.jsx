@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar';
 import ProdutosPage from './pages/ProdutosPage';
 import ClientesPage from './pages/ClientesPage';
 import PedidosPage from './pages/PedidosPage';
+import EntregasPage from './pages/EntregasPage';
 
 const TITULOS = {
   produtos: 'Produtos',
@@ -38,6 +39,7 @@ export default function App() {
           {pagina === 'produtos' && <ProdutosPage />}
           {pagina === 'clientes' && <ClientesPage />}
           {pagina === 'pedidos' && <PedidosPage />}
+          {pagina === 'entregas' && <EntregasPage />}
         </main>
       </div>
     </div>

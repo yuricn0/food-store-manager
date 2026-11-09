@@ -53,3 +53,17 @@ export const pedidoApi = {
       body: JSON.stringify({ status }),
     }),
 };
+
+export const loteApi = {
+  listar: () => request('/lotes'),
+  buscarPorId: (id) => request(`/lotes/${id}`),
+  listarPendentes: () => request('/lotes/pendentes'),
+  sugestoes: () => request('/lotes/sugestoes'),
+  criar: (dados) =>
+    request('/lotes', { method: 'POST', body: JSON.stringify(dados) }),
+  alterarStatus: (id, status) =>
+    request(`/lotes/${id}/status`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status }),
+    }),
+};

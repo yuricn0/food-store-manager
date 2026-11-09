@@ -2,13 +2,14 @@ import { prisma } from '../lib/prisma.js';
 
 const COM_RELACOES = {
   cliente: true,
+  lote: true,
   itens: { include: { produto: true } }
 };
 
 export const pedidoRepository = {
   listar() {
     return prisma.pedido.findMany({
-      include: { cliente: true, itens: true },
+      include: { cliente: true, lote: true, itens: true },
       orderBy: { criadoEm: 'desc' }
     });
   },

@@ -38,7 +38,7 @@ const ITENS = [
   {
     id: 'entregas',
     rotulo: 'Entregas',
-    disponivel: false,
+    disponivel: true,
     icone: (
       <>
         <path d="M14 16V5a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h1" />

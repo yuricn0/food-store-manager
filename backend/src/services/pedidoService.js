@@ -107,6 +107,13 @@ export const pedidoService = {
       throw new AppError('Pedido entregue não pode mudar de status');
     }
 
+    // Um pedido em rota não pode ser cancelado por fora do lote
+    if (status === 'CANCELADO' && pedido.loteId) {
+      throw new AppError(
+        'Pedido vinculado a um lote de entrega. Cancele ou desfaça o lote primeiro.'
+      );
+    }
+
     // Cancelar devolve os itens ao estoque
     if (status === 'CANCELADO') {
       return prisma.$transaction(async (tx) => {
@@ -120,7 +127,11 @@ export const pedidoService = {
         return tx.pedido.update({
           where: { id },
           data: { status: 'CANCELADO' },
-          include: { cliente: true, itens: { include: { produto: true } } }
+          include: {
+            cliente: true,
+            lote: true,
+            itens: { include: { produto: true } }
+          }
         });
       });
     }

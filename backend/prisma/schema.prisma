@@ -42,6 +42,7 @@ model Cliente {
 model Pedido {
   id           Int          @id @default(autoincrement())
   clienteId    Int
+  loteId       Int?
   status       StatusPedido @default(PENDENTE)
   total        Decimal      @db.Decimal(10, 2)
   observacao   String?
@@ -49,6 +50,7 @@ model Pedido {
   atualizadoEm DateTime     @updatedAt
 
   cliente Cliente      @relation(fields: [clienteId], references: [id])
+  lote    LoteEntrega? @relation(fields: [loteId], references: [id])
   itens   ItemPedido[]
 
   @@map("pedidos")
@@ -72,5 +74,27 @@ enum StatusPedido {
   EM_SEPARACAO
   PRONTO
   ENTREGUE
+  CANCELADO
+}
+
+model LoteEntrega {
+  id           Int        @id @default(autoincrement())
+  bairro       String?
+  entregador   String?
+  dataEntrega  DateTime?
+  status       StatusLote @default(AGUARDANDO)
+  observacao   String?
+  criadoEm     DateTime   @default(now())
+  atualizadoEm DateTime   @updatedAt
+
+  pedidos Pedido[]
+
+  @@map("lotes_entrega")
+}
+
+enum StatusLote {
+  AGUARDANDO
+  EM_ROTA
+  CONCLUIDO
   CANCELADO
 }
