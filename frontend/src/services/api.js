@@ -1,10 +1,36 @@
 const BASE_URL = 'http://localhost:3000';
+const CHAVE_TOKEN = 'fsm.token';
+
+export function salvarToken(token) {
+  localStorage.setItem(CHAVE_TOKEN, token);
+}
+
+export function lerToken() {
+  return localStorage.getItem(CHAVE_TOKEN);
+}
+
+export function limparToken() {
+  localStorage.removeItem(CHAVE_TOKEN);
+}
 
 async function request(caminho, opcoes = {}) {
+  const token = lerToken();
+
   const resposta = await fetch(`${BASE_URL}${caminho}`, {
-    headers: { 'Content-Type': 'application/json' },
     ...opcoes,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...opcoes.headers,
+    },
   });
+
+  // Token ausente, inválido ou expirado: derruba a sessão
+  if (resposta.status === 401) {
+    limparToken();
+    window.dispatchEvent(new Event('sessao-expirada'));
+    throw new Error('Sessão expirada. Entre novamente.');
+  }
 
   if (resposta.status === 204) return null;
 
@@ -16,6 +42,19 @@ async function request(caminho, opcoes = {}) {
 
   return dados;
 }
+
+export const authApi = {
+  login: (email, senha) =>
+    request('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, senha }),
+    }),
+  eu: () => request('/auth/eu'),
+};
+
+export const dashboardApi = {
+  resumo: () => request('/dashboard'),
+};
 
 export const produtoApi = {
   listar: () => request('/produtos'),

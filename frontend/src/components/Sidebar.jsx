@@ -1,5 +1,16 @@
 const ITENS = [
   {
+    id: 'dashboard',
+    rotulo: 'Dashboard',
+    disponivel: true,
+    icone: (
+      <>
+        <path d="M3 3v18h18" />
+        <path d="M7 15l4-5 3 3 5-7" />
+      </>
+    ),
+  },
+  {
     id: 'produtos',
     rotulo: 'Produtos',
     disponivel: true,
@@ -11,7 +22,7 @@ const ITENS = [
       </>
     ),
   },
-    {
+  {
     id: 'clientes',
     rotulo: 'Clientes',
     disponivel: true,
@@ -48,20 +59,16 @@ const ITENS = [
       </>
     ),
   },
-  {
-    id: 'dashboard',
-    rotulo: 'Dashboard',
-    disponivel: false,
-    icone: (
-      <>
-        <path d="M3 3v18h18" />
-        <path d="M7 15l4-5 3 3 5-7" />
-      </>
-    ),
-  },
 ];
 
-export default function Sidebar({ aberto, onAlternar, ativo, onNavegar }) {
+export default function Sidebar({
+  aberto,
+  onAlternar,
+  ativo,
+  onNavegar,
+  usuario,
+  onSair,
+}) {
   return (
     <aside
       className={`fixed inset-y-0 left-0 z-40 bg-[#1A2E1F] text-[#F2F2EC]
@@ -113,15 +120,39 @@ export default function Sidebar({ aberto, onAlternar, ativo, onNavegar }) {
                 {item.icone}
               </svg>
               {aberto && <span className="truncate">{item.rotulo}</span>}
-              {aberto && !item.disponivel && (
-                <span className="ml-auto text-[10px] text-[#5E7264] shrink-0">
-                  em breve
-                </span>
-              )}
             </button>
           );
         })}
       </nav>
+
+      <div className="border-t border-white/10 p-3">
+        {aberto && usuario && (
+          <div className="px-1 mb-2">
+            <p className="text-sm text-[#F2F2EC] truncate">{usuario.nome}</p>
+            <p className="text-xs text-[#5E7264] truncate">
+              {usuario.perfil === 'ADMIN' ? 'Administrador' : 'Operador'}
+            </p>
+          </div>
+        )}
+        <button
+          onClick={onSair}
+          title="Sair"
+          className="w-full flex items-center gap-3 px-1 py-2 text-sm text-[#A8BCAE]
+                     rounded hover:bg-white/5 hover:text-[#F2F2EC]"
+        >
+          <svg
+            className="shrink-0"
+            width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" strokeWidth="1.75"
+            strokeLinecap="round" strokeLinejoin="round"
+          >
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <path d="m16 17 5-5-5-5" />
+            <path d="M21 12H9" />
+          </svg>
+          {aberto && <span>Sair</span>}
+        </button>
+      </div>
     </aside>
   );
 }
